@@ -1,1 +1,1 @@
-# MNNU private blockchain mono-repo
+# MNNU private blockchain
