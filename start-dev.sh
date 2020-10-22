@@ -6,6 +6,7 @@ aca-py start \
 	-ot http \
 	-e http://localhost:3000 ws://localhost:3001 \
 	--plugin acapy_plugin_toolbox \
+	--genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis \
 	--admin localhost 3002 \
 	--admin-insecure-mode
 
