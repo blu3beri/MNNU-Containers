@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: aries-acapy-plugin-toolbox
+Version: 0.1.0
+Summary: Aries Cloud Agent - Python Plugin for Aries Toolbox
+Home-page: https://github.com/sovrin-foundation/aca-plugin-toolbox
+Author: Daniel Bluhm <daniel.bluhm@sovrin.org>, Sam Curren <sam@sovrin.org>, Adam Burdett <adam@sovrin.org, Mike Lodder <mike@sovrin.org>
+License: Apache 2.0
+Description: 
+        
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown

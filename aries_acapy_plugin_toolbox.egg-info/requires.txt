@@ -1,0 +1,3 @@
+aries-acapy-plugin-toolbox@ git+https://github.com/hyperledger/aries-acapy-plugin-toolbox.git@86ad8b5c74cb13c3c2c9e8f0a5d084bec5d3ee0e
+aries-cloudagent==0.5.4
+python3-indy==1.15.0
