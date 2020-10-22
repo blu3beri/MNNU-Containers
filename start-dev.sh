@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#starting aca-py with toolbox and admin...
+echo "starting aca-py with toolbox and admin..."
 aca-py start \
 	-it http localhost 3000 -it ws localhost 3001 \
 	-ot http \
