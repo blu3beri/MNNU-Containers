@@ -7,8 +7,9 @@ services:
     build: .
     environment:
       NGROK_NAME: ngrok
-      AGENT_NAME: Berend
+      AGENT_NAME: Mobile Agent
       PORT: 3000
       ADMIN_PORT: 3001
     ports:
       - "3001:3001"
+      - "3000:3000"

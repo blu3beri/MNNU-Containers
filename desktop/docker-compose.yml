@@ -7,7 +7,7 @@ services:
     build: .
     environment:
       NGROK_NAME: ngrok
-      AGENT_NAME: Berend
+      AGENT_NAME: DesktopAgent 
       PORT: 3000
       ADMIN_PORT: 3001
     ports:
