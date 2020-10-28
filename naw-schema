@@ -1,0 +1,17 @@
+{
+  "attributes": [
+    "voornaam",
+    "achternaam",
+    "postcode",
+    "woonplaats",
+    "huisnummer",
+    "toevoeging",
+    "provincie",
+    "telefoonnummer",
+    "email",
+    "geslacht",
+    "geboortedatum",
+  ],
+  "schema_name": "naw",
+  "schema_version": "1.0"
+}
