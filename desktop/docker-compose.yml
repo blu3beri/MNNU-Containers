@@ -1,14 +1,29 @@
 version: "3"
 services:
-  ngrok:
-    image: wernight/ngrok
-    command: ngrok http agent:3000 --log stdout
-  agent:
-    build: .
-    environment:
-      NGROK_NAME: ngrok
-      AGENT_NAME: DesktopAgent 
-      PORT: 3000
-      ADMIN_PORT: 3001
+  user-register-seed:
+    image: byrnedo/alpine-curl
+    command: >-
+      http://dev.greenlight.bcovrin.vonx.io/register
+      -X POST
+      -d '{"alias":"User Agent","seed":"user_seed_0555000000000000000001","role":"TRUST_ANCHOR"}'
+  user-aca-py:
+    build:
+      dockerfile: Dockerfile.acapy
+      context: .
+    depends_on:
+      - user-register-seed
+      - user-aca-py-tunnel-http
     ports:
-      - "3001:3001"
+      - "7002:7002"
+      - "7000"
+    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s user-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7002 --admin-insecure-mode --label "User Agent" --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7000 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "user Wallet" --wallet-key userWallet0000000 --seed user_seed_0555000000000000000001 --plugin acapy_plugin_toolbox --auto-accept-requests --auto-ping-connection --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential --auto-respond-presentation-proposal --auto-respond-presentation-request --auto-verify-presentation --invite --invite-role admin --invite-label "user Agent" --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue'
+
+  user-aca-py-tunnel-http:
+    image: wernight/ngrok
+    ports:
+      - "4040"
+    environment:
+      - NGROK_REGION=eu
+      - NGROK_PORT=user-aca-py:7000
+      - NGROK_BINDTLS=true
+
