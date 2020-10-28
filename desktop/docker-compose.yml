@@ -5,7 +5,7 @@ services:
     command: >-
       http://dev.greenlight.bcovrin.vonx.io/register
       -X POST
-      -d '{"alias":"User Agent","seed":"user_seed_0555000000000000000001","role":"TRUST_ANCHOR"}'
+      -d '{"alias":"${ALIAS}","seed": "${SEED}","role": "${ROLE}"}'
   user-aca-py:
     build:
       dockerfile: Dockerfile.acapy
@@ -16,7 +16,7 @@ services:
     ports:
       - "7002:7002"
       - "7000"
-    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s user-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7002 --admin-insecure-mode --label "User Agent" --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7000 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "user Wallet" --wallet-key userWallet0000000 --seed user_seed_0555000000000000000001 --plugin acapy_plugin_toolbox --auto-accept-requests --auto-ping-connection --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential --auto-respond-presentation-proposal --auto-respond-presentation-request --auto-verify-presentation --invite --invite-role admin --invite-label "user Agent" --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue'
+    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s user-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7002 --admin-insecure-mode --label ${ALIAS} --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7000 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "user Wallet" --wallet-key userWallet0000000 --seed ${SEED} --plugin acapy_plugin_toolbox --auto-accept-requests --auto-ping-connection --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential --auto-respond-presentation-proposal --auto-respond-presentation-request --auto-verify-presentation --invite --invite-role admin --invite-label "user Agent" --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue'
 
   user-aca-py-tunnel-http:
     image: wernight/ngrok
@@ -24,6 +24,5 @@ services:
       - "4040"
     environment:
       - NGROK_REGION=eu
-      - NGROK_PORT=user-aca-py:7000
       - NGROK_BINDTLS=true
-
+      - NGROK_PORT=user-aca-py:7000 
