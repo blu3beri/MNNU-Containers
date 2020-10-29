@@ -18,5 +18,5 @@ aca-py start \
     --debug-credentials \
     --debug-presentations \
     --enable-undelivered-queue \
-    --webhook-url 0.0.0.0:8080 \
+    --webhook-url http://0.0.0.0:8080 \
     "$@"

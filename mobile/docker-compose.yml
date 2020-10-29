@@ -27,8 +27,8 @@ services:
       - NGROK_BINDTLS=true
       - NGROK_PORT=mobile-aca-py:7002
 
-  # mobile-webhook-relay:
-  #   image: karimstekelenburg/aries-cloudagent-webhook-relay
-  #   ports:
-  #     - "8080:8080"
-  #   command: --log DEBUG
+  mobile-webhook-relay:
+    image: karimstekelenburg/aries-cloudagent-webhook-relay
+    ports:
+      - "8080:8080"
+    command: --log DEBUG --api-key ${API_KEY}
