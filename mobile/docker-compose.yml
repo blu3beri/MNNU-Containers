@@ -16,7 +16,7 @@ services:
     ports:
       - "7003:7003"
       - "7002:7002"
-    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s mobile-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7003 --admin-insecure-mode --label ${ALIAS} --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7002 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "${ALIAS} Wallet" --wallet-key "${ALIAS}Wallet0000000" --seed ${SEED} --plugin acapy_plugin_toolbox --auto-accept-requests --auto-ping-connection --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential --auto-respond-presentation-proposal --auto-respond-presentation-request --auto-verify-presentation --invite --invite-role admin --invite-label "${ALIAS}" --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue --webhook-url http://mobile-webhook-relay:8080'
+    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s mobile-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7003 --admin-insecure-mode --label ${ALIAS} --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7002 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "${ALIAS} Wallet" --wallet-key "${ALIAS}Wallet0000000" --seed ${SEED} --plugin acapy_plugin_toolbox --auto-ping-connection --invite --invite-role admin --invite-label "${ALIAS}" --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue --webhook-url http://mobile-webhook-relay:8080 --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential'
 
   mobile-aca-py-tunnel-http:
     image: wernight/ngrok
@@ -32,3 +32,13 @@ services:
     ports:
       - "8080:8080"
     command: --log DEBUG --api-key ${API_KEY}
+
+
+# --auto-accept-requests
+# --auto-respond-credential-proposal
+# --auto-respond-credential-offer
+# --auto-respond-credential-request
+# --auto-store-credential
+# --auto-respond-presentation-proposal
+# --auto-respond-presentation-request
+# --auto-verify-presentation

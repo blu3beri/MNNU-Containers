@@ -16,7 +16,7 @@ services:
     ports:
       - "7001:7001"
       - "7000"
-    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s desktop-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7001 --admin-insecure-mode --label ${ALIAS} --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7000 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "desktop Wallet" --wallet-key desktopWallet0000000 --seed ${SEED} --auto-accept-requests --auto-ping-connection --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential --auto-respond-presentation-proposal --auto-respond-presentation-request --auto-verify-presentation --invite --invite-role admin --invite-label ${ALIAS} --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue --plugin acapy_plugin_toolbox'
+    entrypoint: /bin/bash -c 'export DOMAIN=$$(curl -s desktop-aca-py-tunnel-http:4040/api/tunnels/command_line | grep -o "https:\/\/.*\.eu\.ngrok\.io") && aca-py start --endpoint "$$DOMAIN" --admin 0.0.0.0 7001 --admin-insecure-mode --label ${ALIAS} --inbound-transport acapy_plugin_toolbox.http_ws 0.0.0.0 7000 --outbound-transport http --genesis-url http://dev.greenlight.bcovrin.vonx.io/genesis --wallet-type indy --wallet-name "desktop Wallet" --wallet-key desktopWallet0000000 --seed ${SEED} --auto-ping-connection --invite --invite-role admin --invite-label ${ALIAS} --debug-connections --debug-credentials --debug-presentations --enable-undelivered-queue --plugin acapy_plugin_toolbox --auto-respond-credential-proposal --auto-respond-credential-offer --auto-respond-credential-request --auto-store-credential'
 
   desktop-aca-py-tunnel-http:
     image: wernight/ngrok
@@ -26,3 +26,14 @@ services:
       - NGROK_REGION=eu
       - NGROK_BINDTLS=true
       - NGROK_PORT=user-aca-py:7000 
+
+
+
+# --auto-accept-requests
+#? --auto-respond-credential-proposal
+#? --auto-respond-credential-offer
+#? --auto-respond-credential-request
+#? --auto-store-credential
+# --auto-respond-presentation-proposal
+# --auto-respond-presentation-request
+# --auto-verify-presentation
