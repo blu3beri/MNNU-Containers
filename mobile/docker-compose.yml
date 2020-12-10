@@ -13,6 +13,7 @@ services:
     depends_on:
       - mobile-register-seed
       - mobile-aca-py-tunnel-http
+      - mobile-aca-py-tunnel-http-admin
     ports:
       - "7003:7003"
       - "7002:7002"
@@ -26,6 +27,17 @@ services:
       - NGROK_REGION=eu
       - NGROK_BINDTLS=true
       - NGROK_PORT=mobile-aca-py:7002
+
+  mobile-aca-py-tunnel-http-admin:
+    image: wernight/ngrok
+    ports:
+      - "4041"
+    environment:
+      - NGROK_REGION=eu
+      - NGROK_BINDTLS=true
+      - NGROK_PORT=mobile-aca-py:7003
+      - NGROK_DEBUG=true
+
 
   mobile-webhook-relay:
     image: karimstekelenburg/aries-cloudagent-webhook-relay
